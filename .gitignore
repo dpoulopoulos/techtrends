@@ -1,1 +1,8 @@
+# dot files
 .vagrant
+
+# project specific folders
+venv
+
+# data
+database.db

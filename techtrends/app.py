@@ -3,12 +3,24 @@ import sqlite3
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 
+conn_counter = 0
+
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
 def get_db_connection():
+    global conn_counter
+
     connection = sqlite3.connect('database.db')
     connection.row_factory = sqlite3.Row
+    conn_counter += 1
     return connection
+
+# Function to get all posts in the database
+def get_posts():
+    connection = get_db_connection()
+    posts = connection.execute('SELECT * FROM posts').fetchall()
+    connection.close()
+    return posts
 
 # Function to get a post using its ID
 def get_post(post_id):
@@ -25,9 +37,7 @@ app.config['SECRET_KEY'] = 'your secret key'
 # Define the main route of the web application 
 @app.route('/')
 def index():
-    connection = get_db_connection()
-    posts = connection.execute('SELECT * FROM posts').fetchall()
-    connection.close()
+    posts = get_posts()
     return render_template('index.html', posts=posts)
 
 # Define how each individual article is rendered 
@@ -43,7 +53,7 @@ def post(post_id):
 # Define the About Us page
 @app.route('/about')
 def about():
-    return render_template('about.html')
+     return render_template('about.html')
 
 # Define the post creation functionality 
 @app.route('/create', methods=('GET', 'POST'))
@@ -64,6 +74,30 @@ def create():
             return redirect(url_for('index'))
 
     return render_template('create.html')
+
+# Define the healthcheck endpoint
+@app.route('/healthz', methods=('GET',))
+def healthz():
+    response = app.response_class(
+        response=json.dumps({'result': 'OK - healthy'}),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+# Define the metrics endpoint
+@app.route('/metrics', methods=('GET',))
+def metrics():
+    global conn_counter
+
+    posts = len(get_posts())
+    response = app.response_class(
+        response=json.dumps({'db_connection_count': conn_counter,
+                             'post_count': posts}),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 # start the application on port 3111
 if __name__ == "__main__":
