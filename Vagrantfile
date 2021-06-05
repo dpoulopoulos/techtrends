@@ -6,10 +6,10 @@ Vagrant.configure("2") do |config|
   # set the image for the vagrant box
   config.vm.box = "ubuntu/focal64"
 
-  # st the static IP for the vagrant box
+  # sεt the static IP for the vagrant box
   config.vm.network "private_network", ip: "192.168.50.4"
   
-  # consifure the parameters for VirtualBox provider
+  # configure the parameters for VirtualBox provider
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "4096"
     vb.cpus = 4
