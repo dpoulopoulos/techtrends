@@ -56,10 +56,10 @@ def post(post_id):
     post = get_post(post_id)
 
     if post is None:
-        app.logger.info(f"Article ID {post_id} not found. Returning 404.")
+        app.logger.info("Article ID %d not found. Returning 404.", post_id)
         return render_template("404.html"), 404
     else:
-        app.logger.info(f"Article '{post['title']}' was retrieved.")
+        app.logger.info("Article %s was retrieved.", post['title'])
         return render_template("post.html", post=post)
 
 
@@ -87,7 +87,7 @@ def create():
             connection.commit()
             connection.close()
 
-            app.logger.info(f"Article '{title}' was created.")
+            app.logger.info("Article %s was created.", title)
 
             return redirect(url_for("index"))
 

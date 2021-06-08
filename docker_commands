@@ -1,11 +1,31 @@
 ## Docker commands used to build the application 
-# TODO: insert the docker build command
+docker build -t techtrends:latest .
 
 ## Docker commands used to run the application
-# TODO: insert the docker run command
+docker run -d --name techtrends -p 7111:3111 techtrends
 
 ## Docker commands used to get the application logs
-# TODO: insert the docker logs command
+docker logs techtrends
 
 ## Logs from the container running the TechTrends application
-# TODO: paste logs from the Docker container 
+```
+* Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+[2021-06-08 15:30:58,266] INFO in _internal:  * Running on http://0.0.0.0:3111/ (Press CTRL+C to quit)
+[2021-06-08 15:31:20,389] INFO in _internal: 172.17.0.1 - - [08/Jun/2021 15:31:20] "GET / HTTP/1.1" 200 -
+[2021-06-08 15:31:20,411] INFO in _internal: 172.17.0.1 - - [08/Jun/2021 15:31:20] "GET /static/css/main.css HTTP/1.1" 200 -
+[2021-06-08 15:31:20,457] INFO in _internal: 172.17.0.1 - - [08/Jun/2021 15:31:20] "GET /favicon.ico HTTP/1.1" 404 -
+[2021-06-08 15:32:45,145] INFO in app: Article 2020 CNCF Annual Report was retrieved.
+[2021-06-08 15:32:45,150] INFO in _internal: 172.17.0.1 - - [08/Jun/2021 15:32:45] "GET /1 HTTP/1.1" 200 -
+[2021-06-08 15:32:47,793] INFO in app: 'About Us' page was retrieved.
+[2021-06-08 15:32:47,801] INFO in _internal: 172.17.0.1 - - [08/Jun/2021 15:32:47] "GET /about HTTP/1.1" 200 -
+[2021-06-08 15:32:49,319] INFO in _internal: 172.17.0.1 - - [08/Jun/2021 15:32:49] "GET /create HTTP/1.1" 200 -
+[2021-06-08 15:32:58,522] INFO in app: Article Test title was created.
+[2021-06-08 15:32:58,526] INFO in _internal: 172.17.0.1 - - [08/Jun/2021 15:32:58] "POST /create HTTP/1.1" 302 -
+[2021-06-08 15:32:58,541] INFO in _internal: 172.17.0.1 - - [08/Jun/2021 15:32:58] "GET / HTTP/1.1" 200 -
+[2021-06-08 15:33:07,184] INFO in app: Article ID 17 not found. Returning 404.
+[2021-06-08 15:33:07,188] INFO in _internal: 172.17.0.1 - - [08/Jun/2021 15:33:07] "GET /17 HTTP/1.1" 404 -
+```
