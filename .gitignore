@@ -1,5 +1,6 @@
 # dot files
 .vagrant
+.vscode
 
 # project specific folders
 venv
