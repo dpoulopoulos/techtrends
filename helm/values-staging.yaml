@@ -1,22 +1,22 @@
 namespace:
-  name: sandbox
+  name: staging
 
 service:
-  port: 4111
+  port: 5111
   targetPort: 3111
   protocol: TCP
   type: ClusterIP
 
 image:
-  repository: techtrends
+  repository: dpoulopoulos/techtrends
   tag: latest
   pullPolicy: IfNotPresent
 
-replicaCount: 1
+replicaCount: 3
 
 requests:
-  memory: 64Mi
-  CPU: 250m
+  memory: 90Mi
+  CPU: 300m
 limits:
   memory: 128Mi
   CPU: 500m
