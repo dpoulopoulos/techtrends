@@ -1,0 +1,7 @@
+apiVersion: v1
+name: techtrends
+description: Install techtrends
+version: 1.0.0
+maintainers:
+- name: dpoulopoulos 
+  email: dpoulopoulos@outlook.com
